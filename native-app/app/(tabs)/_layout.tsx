@@ -1,42 +1,106 @@
-import FontAwesome from '@expo/vector-icons/FontAwesome';
-import {Link, Tabs} from 'expo-router';
+// TabLayout.tsx
+import React, { useState ,useEffect} from 'react';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { FontAwesome } from '@expo/vector-icons';
 import {Pressable, useColorScheme} from 'react-native';
 
 import Colors from '../../constants/Colors';
+import MachineStateScreen from './index'; // Replace with your actual authenticated screen component
+import LogPartScreen from './two'; // Replace with your other authenticated screen component
+import LoginScreen from './loginScreen';
+import RegisterScreen from './registrationScreen';
+import LogOutScreen from './logOutScreen';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-/**
- * You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
- */
-function TabBarIcon(props: {
-  name: React.ComponentProps<typeof FontAwesome>['name'];
-  color: string;
-}) {
-  return <FontAwesome size={28} style={{marginBottom: -3}} {...props} />;
-}
 
-export default function TabLayout() {
+const Tab = createBottomTabNavigator();
+
+function TabLayout(navigation) {
   const colorScheme = useColorScheme();
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  let token=  AsyncStorage.getItem('token')
+  console.log('TOKEN',token)
+
+  // if(token)setIsAuthenticated(true)
+
+  useEffect(() => {
+    const checkAuthentication = async () => {
+      try {
+        const token = await AsyncStorage.getItem('token');
+        console.log('TOKEN', token);
+
+        // Check if the token exists
+        if (token) {
+          setIsAuthenticated(true);
+        }
+      } catch (error) {
+        console.error('Error retrieving token:', error);
+        // Handle errors, e.g., show an error message or redirect to the login screen
+      }
+    };
+
+    checkAuthentication();
+  }, []);
 
   return (
-    <Tabs
-      screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
+    <Tab.Navigator
+      tabBarOptions={{
+        activeTintColor: Colors[colorScheme ?? 'light'].tint,
       }}
     >
-      <Tabs.Screen
-        name='index'
-        options={{
-          title: 'Machine State',
-          tabBarIcon: ({color}) => <TabBarIcon name='list-ul' color={color} />,
-        }}
-      />
-      <Tabs.Screen
-        name='two'
-        options={{
-          title: 'Log Part',
-          tabBarIcon: ({color}) => <TabBarIcon name='edit' color={color} />,
-        }}
-      />
-    </Tabs>
+      {isAuthenticated ? (
+        <>
+          <Tab.Screen
+            name="index"
+            component={MachineStateScreen} // Replace with your actual authenticated screen component
+            options={{
+              title: 'Machine State',
+              tabBarIcon: ({ color }) => <FontAwesome name="list-ul" size={28} style={{ marginBottom: -3, color }} />,
+            }}
+          />
+          <Tab.Screen
+            name="two"
+            component={LogPartScreen} // Replace with your other authenticated screen component
+            options={{
+              title: 'Log Part',
+              tabBarIcon: ({ color }) => <FontAwesome name="edit" size={28} style={{ marginBottom: -3, color }} />,
+            }}
+          />
+           <Tab.Screen
+            name="logout"
+    
+            component={() => <LogOutScreen  onLogin={() => setIsAuthenticated(false)} />}
+            options={{
+              title: 'LogOut',
+              tabBarIcon: ({ color }) => <FontAwesome name="sign-out" size={28} style={{ marginBottom: -3, color }} />,
+            }}
+          />
+        </>
+      ) : ( 
+        <>
+          <Tab.Screen
+            name="login"
+            component={() => <LoginScreen navigation={navigation} onLogin={() => setIsAuthenticated(true)} />}
+            // component={LoginScreen}
+            options={{
+              title: 'Login',
+              tabBarIcon: ({ color }) => <FontAwesome name="sign-in" size={28} style={{ marginBottom: -3, color }} />,
+            }}
+          />
+          <Tab.Screen
+            name="register"
+            component={RegisterScreen}
+            options={{
+              title: 'Register',
+              tabBarIcon: ({ color }) => <FontAwesome name="user-plus" size={28} style={{ marginBottom: -3, color }} />,
+            }}
+          />
+          
+        </>
+      )} 
+    </Tab.Navigator>
   );
 }
+
+export default TabLayout;
