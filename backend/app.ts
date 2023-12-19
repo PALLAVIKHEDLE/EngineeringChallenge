@@ -27,10 +27,8 @@ app.post('/machine-health', async (req: Request, res: Response) => {
     //push to mongo
     let historyDATA= syncToCloud(req.body,result)
     try {
-     console.log('historyDATA',historyDATA)
      for (const data of historyDATA) {
         const savedData = await data.save();
-       console.log('Saved Historical Data:', savedData);
     }
     } catch (error) {
       // Handle the error here
@@ -66,7 +64,6 @@ app.post('/register', async (req: Request, res: Response) => {
   try {
     const { error, user } = await registerUser(username, password);
     if (error) {
-      console.log('Registration Error:', error);
       return res.status(400).json({ error: error.message });
     }
     res.json({ user });

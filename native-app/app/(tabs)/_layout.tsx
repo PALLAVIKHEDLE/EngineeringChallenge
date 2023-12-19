@@ -20,16 +20,11 @@ function TabLayout(navigation) {
   const colorScheme = useColorScheme();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  let token=  AsyncStorage.getItem('token')
-  console.log('TOKEN',token)
-
-  // if(token)setIsAuthenticated(true)
 
   useEffect(() => {
     const checkAuthentication = async () => {
       try {
         const token = await AsyncStorage.getItem('token');
-        console.log('TOKEN', token);
 
         // Check if the token exists
         if (token) {
@@ -68,14 +63,6 @@ function TabLayout(navigation) {
               tabBarIcon: ({ color }) => <FontAwesome name="edit" size={28} style={{ marginBottom: -3, color }} />,
             }}
           />
-           <Tab.Screen
-            name="logout"
-            component={() => <LogOutScreen  onLogin={() => setIsAuthenticated(false)} />}
-            options={{
-              title: 'LogOut',
-              tabBarIcon: ({ color }) => <FontAwesome name="sign-out" size={28} style={{ marginBottom: -3, color }} />,
-            }}
-          />
           <Tab.Screen
           name="historyChart"
           component={HistoryChartScreen}
@@ -83,9 +70,17 @@ function TabLayout(navigation) {
             title: 'Visualization',
             tabBarIcon: ({ color }) => (
               <FontAwesome name="line-chart" size={28} style={{ marginBottom: -3, color }} />
-            ),
-          }}
+              ),
+            }}
         />
+            <Tab.Screen
+             name="logout"
+             component={() => <LogOutScreen  onLogin={() => setIsAuthenticated(false)} />}
+             options={{
+               title: 'LogOut',
+               tabBarIcon: ({ color }) => <FontAwesome name="sign-out" size={28} style={{ marginBottom: -3, color }} />,
+             }}
+           />
         </>
       ) : ( 
         <>

@@ -21,8 +21,6 @@ export async function registerUser(
         const hash = await bcrypt.hash(password, 10);
   
         const user = new UserModel({ username, password:hash});
-        console.log('tryUser', user);
-  
         const savedUser = await user.save();
   
         return { error: null, user: savedUser as IUser }; // Explicitly cast to IUser
@@ -31,9 +29,6 @@ export async function registerUser(
         if (error.code === 11000 || error.code === 11001) {
           return { error: { type: 'duplicate_username', message: 'Username already exists' }, user: null };
         }
-  
-        // Log the error details for debugging
-        console.error(`Error during registration (Retry ${retryCount + 1}/${maxRetries}):`, error);
   
         retryCount++;
         // Add a longer delay before retrying
