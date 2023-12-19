@@ -25,35 +25,29 @@ app.post('/machine-health', async (req: Request, res: Response) => {
   } else {
     res.json(result);
     //push to mongo
+    let historyDATA= syncToCloud(req.body,result)
     try {
-     let historyDATA= syncToCloud(req.body,result)
      console.log('historyDATA',historyDATA)
      for (const data of historyDATA) {
         const savedData = await data.save();
        console.log('Saved Historical Data:', savedData);
     }
-      // const historyDATA = new historyDataModel({  machineId: "WeldingMachine",
-      // userId: 'role2',
-      // timestamp: new Date(),
-      // score: "58.4",
-      // dataPoints: {
-      //   "assemblyLine": {
-      //     "alignmentAccuracy": "0.5"
-      //   },
-      //   "weldingRobot": {
-      //     "vibrationLevel": "4.0",
-      //     "electrodeWear": "0.8"
-      //   }
-      // },});
-     
     } catch (error) {
       // Handle the error here
-      console.error('Error saving historical data:', error);
-      res.status(500).json({ error: 'Internal Server Error' });
+      console.log('Error saving historical data:', error);
     }
   }
 });
 
+app.get('/historyDataPoints', async (req, res) => {
+  try {
+    const fetchedData = await historyDataModel.find({ });
+    res.json(fetchedData);
+  } catch (error) {
+    console.error('Error fetching data from MongoDB:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
 
 app.get('/hello', (req, res) => res.send("Hello World"));
 

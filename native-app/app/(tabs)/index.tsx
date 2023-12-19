@@ -35,7 +35,7 @@ export default function StateScreen() {
 
       if (response.data?.factory) {
         setScores(response.data);
-      }
+      }     
     } catch (error) {
       console.error(error);
       console.log(

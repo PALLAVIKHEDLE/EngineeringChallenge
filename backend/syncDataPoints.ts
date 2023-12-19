@@ -9,7 +9,7 @@ export const syncToCloud = (requestBody: any, result: any) => {
     // Mapping machines data
     const machineIds = Object.keys(machinesData);
     const machinesHistoryData = machineIds.map((machineId) => {
-        const scoreValue = scoresData[machineId] || '0.00';
+        const scoreValue = scoresData[machineId] ;
         console.log('scorevalue',scoreValue)
 
         return new historyDataModel({
