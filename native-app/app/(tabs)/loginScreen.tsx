@@ -16,13 +16,11 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ navigation ,onLogin}) => {
     try {
       // Perform user login
       const userData = await loginUser(username, password);
-      console.log('useData', userData)
       onLogin();
       navigation.navigate('index'); 
     } catch (error) {
         if(error.message=="Login failed")alert('Login Failed')
       console.log('Login failed:', error.message);
-     
     }
   };
 
