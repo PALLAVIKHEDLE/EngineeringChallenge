@@ -1,7 +1,6 @@
 import express, { Request, Response } from 'express';
 import { getMachineHealth } from './machineHealth';
 import { registerUser, loginUser } from '../backend/netlify/functions/api/userService';
-// import { IDataPoint, DataPointModel } from '../backend/netlify/functions/api/dataPoint';
 import jwt from 'jsonwebtoken';
 import cors from 'cors'; 
 import mongoDb from './netlify/functions/api/db'
@@ -31,12 +30,12 @@ app.post('/machine-health', async (req: Request, res: Response) => {
         const savedData = await data.save();
     }
     } catch (error) {
-      // Handle the error here
       console.log('Error saving historical data:', error);
     }
   }
 });
 
+//Fetching  dataPoints stored in mongoDB
 app.get('/historyDataPoints', async (req, res) => {
   try {
     let finalData=[]
@@ -84,7 +83,6 @@ app.post('/login', (req: Request, res: Response) => {
       return res.status(401).json({ error: 'Invalid username or password' });
     }
 
-    // Generate a token and send it to the client
     const token = jwt.sign({ username: user.username }, 'e0NldHbb/VaWwH7B9J0kPM6B5HSPfKHOkeo4KF5VeQji8neWwTk7oI7kp44awOdPzvHaToJT9hJ36NkNA7VPZ1LIj/7TYLwloPUVTp/VhsAky9874XeQoaZOUUT2I+tOL3L0z8BnEbN2+uyH6kvKkNMUHLKWsRx1OxKf/oXaQt5X9P56lF7rPPuoY3JO97xgFvLaEY6393B1wnEiVWqHPW9xeMz/XOBIDiGQvHTAopAlg61UKJmHRaA6wfAh4HGQldMojIHPAat5zyTUAsjnkGNSV9BfCbCqKiOxbXE3rRC/4R5+2edpMHMLqAjq55B2S636m+Q0kTeRuiSNN+mH2Q==');
 
     res.json({ token });

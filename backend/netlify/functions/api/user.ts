@@ -1,3 +1,4 @@
+// schema definition for the user entity.
 import { Document, Schema, model } from 'mongoose';
 
 export interface IUser extends Document {

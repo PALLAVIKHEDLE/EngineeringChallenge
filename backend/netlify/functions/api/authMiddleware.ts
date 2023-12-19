@@ -1,4 +1,5 @@
-// middleware/authMiddleware.ts
+//Middleware for authenticating a user using a JWT token.
+
 import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 

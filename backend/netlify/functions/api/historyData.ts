@@ -1,6 +1,7 @@
 import { Document, Schema, model } from 'mongoose';
 import { format } from 'date-fns';
 
+//historical data for a machine.
 export interface IHistoryData  {
     machineId: string;
     userId: string;
@@ -8,7 +9,7 @@ export interface IHistoryData  {
     score: string;
     dataPoints: RecursiveDataPoints;
 }
-
+//recursive data points structure.
 interface RecursiveDataPoints {
     [key: string]: string | RecursiveDataPoints;
 }

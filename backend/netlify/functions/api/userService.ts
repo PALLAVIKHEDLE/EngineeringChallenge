@@ -7,6 +7,14 @@ interface UserError {
   error?: any;
 }
 
+/**
+ * Registers a new user with the provided username and password.
+ * @param {string} username - The username for the new user.
+ * @param {string} password - The password for the new user.
+ * @example
+ * // Example usage:
+ * const registrationResult = await registerUser("testUser", "testUserPassword");
+ */
 export async function registerUser(
     username: string,
     password: string

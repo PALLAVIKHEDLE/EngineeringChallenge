@@ -16,6 +16,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Tab = createBottomTabNavigator();
 
+//TabLayout component manages the bottom tab navigation based on user authentication status.
 function TabLayout(navigation) {
   const colorScheme = useColorScheme();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -44,7 +45,9 @@ function TabLayout(navigation) {
       tabBarOptions={{
         activeTintColor: Colors[colorScheme ?? 'light'].tint,
       }}
-    >
+    >      
+    {/* Display bottom tabs based on authentication status */}
+
       {isAuthenticated ? (
         <>
           <Tab.Screen

@@ -3,7 +3,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 // const API_BASE_URL = 'http://localhost:3001';  
 const API_BASE_URL = 'http://192.168.1.141:3001'; 
 
-
+//Calls the registration API to register a new user
 export const registerUser = async (username, password) => {
   try {
     const response = await fetch(`${API_BASE_URL}/register`, {
@@ -27,6 +27,7 @@ export const registerUser = async (username, password) => {
   }
 };
 
+// Calls the login API to authenticate a user.
 export const loginUser = async (username, password) => {
   try {
     const response = await fetch(`${API_BASE_URL}/login`, {
@@ -51,6 +52,7 @@ export const loginUser = async (username, password) => {
   }
 };
 
+//Calls the API to fetch historical data points.
 export const fetchHistoryDataPoints = async () => {
   try {
     const response = await fetch(`${API_BASE_URL}/historyDataPoints`, {
