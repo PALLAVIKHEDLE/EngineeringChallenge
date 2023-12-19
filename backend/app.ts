@@ -41,8 +41,17 @@ app.post('/machine-health', async (req: Request, res: Response) => {
 
 app.get('/historyDataPoints', async (req, res) => {
   try {
-    const fetchedData = await historyDataModel.find({ });
-    res.json(fetchedData);
+    let finalData=[]
+    const fetchedData = await historyDataModel.distinct('machineId');
+    for (const machineId of fetchedData) {
+      // Find documents for each machineId
+      const documents = await historyDataModel.find({ machineId });
+      // Extract timestamps and scores
+      const timestamps = documents.map(doc => doc.timestamp);
+      const scores = documents.map(doc => doc.score);
+      finalData.push({'label':machineId,'labels':timestamps,'data':scores})
+    }
+    res.json(finalData);
   } catch (error) {
     console.error('Error fetching data from MongoDB:', error);
     res.status(500).json({ error: 'Internal Server Error' });

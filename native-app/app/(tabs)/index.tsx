@@ -1,4 +1,4 @@
-import {Button, Platform, StyleSheet} from 'react-native';
+import {Button, Platform, StyleSheet, ScrollView} from 'react-native';
 import {Text, View} from '../../components/Themed';
 import {Link, useFocusEffect} from 'expo-router';
 import axios from 'axios';
@@ -50,6 +50,7 @@ export default function StateScreen() {
 
   return (
     <View style={styles.container}>
+      <ScrollView>
       <View style={styles.separator} />
       {!machineData && (
         <Link href='/two' style={styles.link}>
@@ -114,6 +115,8 @@ export default function StateScreen() {
           color='#FF0000'
         />
       </View>
+    </ScrollView>
+
     </View>
   );
 }
