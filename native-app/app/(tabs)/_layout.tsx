@@ -10,6 +10,7 @@ import LogPartScreen from './two'; // Replace with your other authenticated scre
 import LoginScreen from './loginScreen';
 import RegisterScreen from './registrationScreen';
 import LogOutScreen from './logOutScreen';
+import HistoryChartScreen from './historyChart'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
@@ -69,13 +70,22 @@ function TabLayout(navigation) {
           />
            <Tab.Screen
             name="logout"
-    
             component={() => <LogOutScreen  onLogin={() => setIsAuthenticated(false)} />}
             options={{
               title: 'LogOut',
               tabBarIcon: ({ color }) => <FontAwesome name="sign-out" size={28} style={{ marginBottom: -3, color }} />,
             }}
           />
+          <Tab.Screen
+          name="historyChart"
+          component={HistoryChartScreen}
+          options={{
+            title: 'Visualization',
+            tabBarIcon: ({ color }) => (
+              <FontAwesome name="line-chart" size={28} style={{ marginBottom: -3, color }} />
+            ),
+          }}
+        />
         </>
       ) : ( 
         <>
