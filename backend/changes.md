@@ -168,7 +168,7 @@ Once you have this installation done -
 - Run docker compose -
 `docker-compose -f docker-compose.yml up -d`
 
-* [`docker-compose.yml`](./docker-compose.yml) defines `root` as mongo username and `password` as mongo password. Your final connection string would look like `mongodb://root:password@localhost:27017/`
+* [`docker-compose.yml`](../docker-compose.yml) defines `root` as mongo username and `password` as mongo password. Your final connection string would look like `mongodb://root:password@localhost:27017/`
 
 * Visit [localhost:8088](http://localhost:8088/) for mongo-express web interface.
 

@@ -33,7 +33,8 @@ yarn start
 ### Authentication and Session Management:
 * Two components, [`registrationScreen`](./app/(tabs)/registrationScreen.tsx) and [`loginScreen`](./app/(tabs)/loginScreen.tsx), handle user registration and login, respectively. The corresponding API calls (`registerUser` and `loginUser`) are implemented in ['authService`](./app/(tabs)/authService.tsx).
   
-  Screenshots:
+  #### Screenshots:
+
   ![Login Screen](./assets/frontendScreen/loginScreen.png)
   ![Registration Screen](./assets/frontendScreen/registrrationScreen.png)
 
