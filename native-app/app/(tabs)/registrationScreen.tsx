@@ -15,18 +15,10 @@ const RegisterScreen: React.FC<RegisterScreenProps> = ({ navigation }) => {
     try {
       // Perform user registration
       const userData = await registerUser(username, password);
+      alert(userData&&userData.message)
       navigation.navigate('login'); 
     } catch (error) {
-      try {
-        const parsedError = JSON.parse(error.message);
-        if (parsedError && parsedError.type === 'duplicate_username') {
-          alert('Username already exists');
-        } else {
-          alert('Registration failed. Please try again later.');
-        }
-      } catch (parseError) {
-        alert('Registration failed. Please try again later.');
-      }
+      alert(error.message)
     }
   };
 

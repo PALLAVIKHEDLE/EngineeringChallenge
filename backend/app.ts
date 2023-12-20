@@ -65,7 +65,7 @@ app.post('/register', async (req: Request, res: Response) => {
     if (error) {
       return res.status(400).json({ error: error.message });
     }
-    res.json({ user });
+    res.json({message: 'User Created Successfully!' });
   } catch (error) {
     res.status(500).json({ error: 'Internal Server Error' });
   }
