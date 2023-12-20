@@ -41,7 +41,7 @@ const LineChartExample: React.FC = () => {
     };
 
     fetchData();
-  }, []); 
+  }, [datasets]); 
 
   if (!datasets || datasets.length === 0) {
     return (
@@ -110,22 +110,6 @@ const LineChartExample: React.FC = () => {
           style={{
             marginVertical: 8,
             borderRadius: 16,
-          }}
-          
-         
-          decorator={() => {
-            return alignedData.labels.map((value, index) => (
-              <Text
-                key={index}
-                style={{
-                  position: 'absolute',
-                  left: (index * 300) / (alignedData.labels.length - 1) - 16,
-                  bottom: 0,
-                  fontSize: 8, // Set the font size for data labels
-                }}>
-                {value}
-              </Text>
-            ));
           }}
         />
       )}
