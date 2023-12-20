@@ -1,4 +1,4 @@
-## Changes
+## Frontend Changes
 -----------
 ## Set backend API url
 
@@ -27,7 +27,7 @@ To run the following command:
 yarn start
 ```
 
-## Changes
+## Note
 * I have replace `expo-router` to `react-navigation/bottom-tabs` for Tab layout. The bottom tabs dynamically display based on the authentication status.
 
 ### Authentication and Session Management:
