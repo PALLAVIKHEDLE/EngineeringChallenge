@@ -2,6 +2,11 @@
 
 Welcome to the Machine Health App, a React Native Expo project designed to evaluate the health of various machines in an automobile factory. This README will guide you on setting up and running the app, as well as understanding its structure.
 
+## Submission Details and Changes:
+
+- Frontend Changes [here](./changes.md) 
+- Backend Changes [here](../backend/changes.md)
+
 ## Getting Started
 
 To get started with the app, follow these steps:
