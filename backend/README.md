@@ -75,6 +75,3 @@ You can add and run tests to ensure the correctness of the API. Follow these ste
 ## Customization
 
 You can customize machine data and health evaluation logic by modifying the `machineData.json` file and the calculation functions in `app.ts`.
-
-
-Find changes (`./changes.md`)

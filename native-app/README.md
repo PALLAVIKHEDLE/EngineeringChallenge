@@ -52,5 +52,3 @@ You are free to choose how you'd like to test this repo, think about options and
 ## Customization
 
 If you would like, feel free to modify the app as needed.
-
-Find changes (`./changes.md`)

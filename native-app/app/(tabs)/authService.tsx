@@ -1,6 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-// const API_BASE_URL = 'http://localhost:3001';  
 const API_BASE_URL = 'http://192.168.1.141:3001'; 
 
 //Calls the registration API to register a new user
