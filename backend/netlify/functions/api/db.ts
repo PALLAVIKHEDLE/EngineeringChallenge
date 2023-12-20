@@ -1,7 +1,8 @@
 //MongoDB connection setup 
 import mongoose from 'mongoose';
 
-const MONGODB_URI = 'mongodb+srv://pallavi8khedle:pallavi%403Esoft@cluster0.juonjhy.mongodb.net/';
+const MONGODB_URI = 'mongodb://root:password@localhost:27017/';
+
 
   mongoose.connect(MONGODB_URI, {
     useNewUrlParser: true,
